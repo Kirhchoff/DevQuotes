@@ -1,0 +1,14 @@
+h1 {
+  font-size: 240%;
+  color: blue;
+}
+
+.content div {
+  margin-top: 100px;
+}
+
+.quote {
+  font-style: italic;
+  font-size: 150%;
+  color: #76ad58;
+}
