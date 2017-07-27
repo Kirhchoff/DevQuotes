@@ -26,21 +26,19 @@
   flex: 0 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   border-radius: 1em;
 }
 
 .title {
-  display: flex;
   flex: 0 0 3em;
-  justify-content: space-between;
+  display: flex;
   align-items: center;
 }
 
 .title > h1 {
   font-size: 2.4rem;
   color: #111;
-  margin-left: 3rem;
+  margin-left: 1.5rem;
 }
 
 .content {
@@ -57,6 +55,11 @@
 .quote {
   font-size: 2.2em;
   margin: 1rem 3rem;
+}
+
+#author {
+  margin-left: 4rem;
+  margin-top: 0.4rem;
 }
 
 .quote-container {
@@ -106,15 +109,18 @@
 
 .menu {
   display: flex;
-  padding: 1px;
   background-color: #aaa;
   border-top: 1px solid #222;
   border-radius: 0.5rem 0.5rem 0px 0px;
+  padding: 0 1.5rem;
 }
 
 .menu > p {
-  margin: 0 3rem;
+  padding: 1px 1.5rem;
   cursor: pointer;
+}
+.menu > p:hover {
+  background-color: #888;
 }
 .menu > p::first-letter {
   text-decoration: underline;
@@ -126,7 +132,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex: 0 0 1;
+  flex: 0 0;
 }
 
 .status-bar > p {

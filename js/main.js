@@ -1,16 +1,25 @@
 var to;
 function setNewQuote(quote) {
+  let author = " - Author";
   clearTimeout(to);
   let cursor = "<span class=\"cursor\"></span>";
-  let target = document.getElementById("quote");
-  target.innerHTML = quote + cursor;
-  let iter = 0;
-  let printChar = function(){
-    target.innerHTML = quote.slice(0, ++iter) + cursor;
-    if(iter < quote.length)
-      to = setTimeout(printChar, 17);
+  let quoteHolder = document.getElementById("quote");
+  let authorHolder = document.getElementById("author");
+  let printCharByChar = function(callback, message, target, iter = 0){
+    target.innerHTML = message.slice(0, ++iter) + cursor;
+    if(iter < message.length)
+      to = setTimeout(printCharByChar.bind(this, callback, message, target, iter), 17);
+    else {
+      target.innerHTML = message;
+      callback();
+    }
   }
-  printChar();
+  printCharByChar(()=>{
+    printCharByChar(()=>{
+      authorHolder.innerHTML = author + cursor;
+    }, author, authorHolder);
+    authorHolder.innerHTML = " - Author" + cursor;
+  }, "> " + quote, quoteHolder);
 }
 
 function fallback() {
