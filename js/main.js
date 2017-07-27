@@ -1,24 +1,20 @@
-
+var to;
 function setNewQuote(quote) {
+  clearTimeout(to);
+  let cursor = "<span class=\"cursor\"></span>";
   let target = document.getElementById("quote");
-  target.innerHTML = quote;
-  let r = Math.floor(Math.random() * 256);
-  let g = Math.floor(Math.random() * 256);
-  let b = Math.floor(Math.random() * 256);
-  target.style.backgroundColor = "rgb("+r+","+g+","+b+")";
-
-  var isColorLight = function (r, g, b) {
-    // Counting the perceptive luminance
-    // human eye favors green color...
-    var a = 1 - (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return (a < 0.5);
+  target.innerHTML = quote + cursor;
+  let iter = 0;
+  let printChar = function(){
+    target.innerHTML = quote.slice(0, ++iter) + cursor;
+    if(iter < quote.length)
+      to = setTimeout(printChar, 17);
   }
-
-  target.style.color = isColorLight(r,g,b) ? "black" : "white";
+  printChar();
 }
 
 function fallback() {
-  setNewQuote("<h2>Quoter service unreachable... But here is a quote for you anyway:</h2>"+getQuote());
+  setNewQuote("<h2>Quoter service is unfortunately unreachable... But here is a backoup quote for you anyway:</h2>" + getQuote());
 }
 
 function httpGetAsync(theUrl, callback)
@@ -30,7 +26,6 @@ function httpGetAsync(theUrl, callback)
     }
     xmlHttp.onerror = fallback;
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
-    xmlHttp.setRequestHeader("Origin", "Bar");
     xmlHttp.send(null);
 }
 
@@ -39,6 +34,5 @@ function updateQuote() {
 }
 
 window.onload = function() {
-  document.getElementById("gen_quote").onclick = updateQuote;
   updateQuote();
 };

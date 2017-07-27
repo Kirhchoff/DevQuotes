@@ -17,14 +17,26 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="title">
-      <h1>DevQuotes</h1>
+  <div class="page">
+    <div class="container">
+      <div class="header">
+        <div class="title">
+          <h1>DevQuotes</h1>
+        </div>
+        <div class="menu">
+          <p>Menu</p> <p>About</p>
+        </div>
+      </div>
+      <div class="content">
+        <div class="quote-container" id="quote-container">
+          <div class="quote" id="quote"></div>
+        </div>
+      </div>
+      <div class="status-bar">
+        <p>Copyright (c) 2017 Krzysztof Kirsz</p>
+        <p>Powered by <a href="https://quotor.herokuapp.com">quotor.herokuapp.com</a></p>
+      </div>
     </div>
-    <div class="content">
-      <div class="quote" id="quote">Random qoute goes here</div>
-      <button type="button" id="gen_quote">Generate quote</button>
-  </div>
   </div>
   <script src="js/fallback_quotes.js"></script>
   <script src="js/main.js"></script>
