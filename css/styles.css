@@ -113,9 +113,15 @@ ul.drop-down-menu {
   padding: 0;
 }
 
+nav li {
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
 .menu li {
   padding: 1px 1.5rem;
   cursor: pointer;
+  white-space: nowrap;
 }
 .menu li:hover {
   background-color: #888;

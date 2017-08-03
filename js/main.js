@@ -18,7 +18,7 @@ function setNewQuote(quote) {
     printCharByChar(()=>{
       authorHolder.innerHTML = author + cursor;
     }, author, authorHolder);
-    authorHolder.innerHTML = " - Author" + cursor;
+    authorHolder.innerHTML = author + cursor;
   }, "> " + quote, quoteHolder);
 }
 
@@ -42,6 +42,11 @@ function updateQuote() {
   httpGetAsync("https://quotor.herokuapp.com/quote", setNewQuote);
 }
 
+function setupMenu() {
+  //todo: handle mouse events on menu
+}
+
 window.onload = function() {
   updateQuote();
+  setupMenu();
 };
