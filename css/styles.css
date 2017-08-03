@@ -91,7 +91,7 @@
 
 nav {
   background-color: #aaa;
-  border-top: 1px solid #222;
+  border-top: 1px solid #111;
   border-radius: 0.5rem 0.5rem 0px 0px;
   padding: 0 1.5rem;
 }
@@ -106,9 +106,10 @@ nav>ul>li {
 
 ul.drop-down-menu {
   position: absolute;
+  border-top: 1px solid #555;
   top: 100%;
   left: 0%;
-  width: 100%;
+  min-width: 100%;
   padding: 0;
 }
 
@@ -119,15 +120,15 @@ ul.drop-down-menu {
 .menu li:hover {
   background-color: #888;
 }
-.menu li::first-letter {
+.menu > li::first-letter {
   text-decoration: underline;
 }
 
-.drop-down-menu li {
+.drop-down-menu {
   background-color: #aaa;
   display: none;
 }
-.menu > li:hover > ul.drop-down-menu li {
+.menu > li:hover > ul.drop-down-menu {
   display: block;
 }
 
