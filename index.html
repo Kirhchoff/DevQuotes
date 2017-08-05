@@ -14,6 +14,7 @@
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
+  <script src="https://use.fontawesome.com/46e73f7d3a.js"></script>
 </head>
 
 <body>
@@ -27,19 +28,26 @@
           <ul class="menu">
             <li>Menu
               <ul class="drop-down-menu">
-                <li>Suggest a new quote...</li>
+                <li id="menu-suggest">Suggest a new quote...</li>
+                <li id="menu-tips">Tip jar ...</li>
               </ul>
             </li>
             <li>About
               <ul class="drop-down-menu">
-                <li><a href="https://kirhchoff.github.io/">Author</a></li>
-                <li>Tip jar ...</li>
+                <li id="menu-author"><a href="https://kirhchoff.github.io/">Author</a></li>
+                <li id="menu-quote">This quote</li>
+              </ul>
+            </li>
+            <li>Share this quote
+              <ul class="drop-down-menu">
+                <li id="menu-tweet"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet!</li>
               </ul>
             </li>
           </ul>
         </nav>
       </div>
       <div class="content">
+        <div class="status" id="status"></div>
         <div class="quote-container" id="quote-container">
           <div class="quote"><p id="quote"></p><p id="author"></p></div>
         </div>
@@ -49,8 +57,28 @@
         <p>Powered by <a href="https://quotor.herokuapp.com">quotor.herokuapp.com</a></p>
       </div>
     </div>
+
+    <div class="popup" id="tipjar">
+      <div class="popup-greyout"></div>
+      <div class="popup-container">
+        <div class="box">
+          <div class="box-topbar">
+            Tipjar
+            <button class="btn-close" id="btn-close-tipjar">x</button>
+          </div>
+          <div class="box-content">
+            <p>If you liked your quote and want to seem more of them, or just having a generous mood, trow me a tip:</p>
+            <hr>
+            <p>Bitcoin address: <em>N/A yet</em></p>
+            <hr>
+            <p>Litecoin address: <em>LawkvBv8oWUtmnZWWK2ZtivXXQxLJSgkuE</em><img src="resources/LTC.png"></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="js/fallback_quotes.js"></script>
   <script src="js/main.js"></script>
+
 </body>
 </html>

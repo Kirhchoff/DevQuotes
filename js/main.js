@@ -1,5 +1,9 @@
 var to;
+var state = {};
+
 function setNewQuote(quote) {
+  setStatus("");
+  state.quote = quote;
   let author = " - Author";
   clearTimeout(to);
   let cursor = "<span class=\"cursor\"></span>";
@@ -22,11 +26,17 @@ function setNewQuote(quote) {
   }, "> " + quote, quoteHolder);
 }
 
-function fallback() {
-  setNewQuote("<h2>Quoter service is unfortunately unreachable... But here is a backoup quote for you anyway:</h2>" + getQuote());
+function setStatus(status) {
+  let statusHolder = document.getElementById("status");
+  statusHolder.innerHTML = status;
 }
 
-function httpGetAsync(theUrl, callback)
+function fallback() {
+  setNewQuote(getQuote());
+  setStatus("Quoter service is unfortunately unreachable... But here is a backup quote for you anyway:");
+}
+
+function httpGetAsync(callback, theUrl)
 {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
@@ -39,14 +49,53 @@ function httpGetAsync(theUrl, callback)
 }
 
 function updateQuote() {
-  httpGetAsync("https://quotor.herokuapp.com/quote", setNewQuote);
+  state.quote = "";
+  if (window.location.hash){
+    httpGetAsync(setNewQuote, "https://quotor.herokuapp.com/quote?q=" + window.location.hash.slice(1));
+  } else {
+    httpGetAsync(setNewQuote, "https://quotor.herokuapp.com/quote");
+  }
+}
+
+function showTipJar(){
+  let tipJar = document.getElementById("tipjar");
+  tipJar.style.display = "block";
+}
+
+function hideTipJar(){
+  let tipJar = document.getElementById("tipjar");
+  tipJar.style.display = "none";
+}
+
+function showNewQuoteForm() {
+  console.log("New quote form");
 }
 
 function setupMenu() {
-  //todo: handle mouse events on menu
+  let tipJar = document.getElementById("menu-tips");
+  tipJar.addEventListener("click", ()=>{
+    showTipJar();
+  });
+  let suggest = document.getElementById("menu-suggest");
+  suggest.addEventListener("click", ()=>{
+    showNewQuoteForm();
+  });
+  let tweet = document.getElementById("menu-tweet");
+  tweet.addEventListener("click", ()=>{
+    window.open("https://twitter.com/intent/tweet?text="+state.quote);
+  });
+}
+
+function setupTipjar() {
+  let btnClose = document.getElementById("btn-close-tipjar");
+  btnClose.addEventListener("click", ()=>{
+    hideTipJar();
+  })
 }
 
 window.onload = function() {
+  setStatus("Loading...");
   updateQuote();
   setupMenu();
+  setupTipjar();
 };
