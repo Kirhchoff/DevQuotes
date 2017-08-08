@@ -1,6 +1,9 @@
-var to;
+
+
 var state = {};
 
+//todo: refactor: encapsulate
+var to;
 function setNewQuote(quote) {
   setStatus("");
   state.quote = quote;
