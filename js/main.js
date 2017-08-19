@@ -4,14 +4,21 @@ var state = {};
 
 //todo: refactor: encapsulate
 var to;
+
+function processQuoteFromService(quote) {
+  setNewQuote(JSON.parse(quote));
+}
+
 function setNewQuote(quote) {
   setStatus("");
-  state.quote = quote;
-  let author = " - Author";
+  state.quote = quote.text;
+  state.author = " - " + quote.author;
+  state.qid = quote.id;
   clearTimeout(to);
   let cursor = "<span class=\"cursor\"></span>";
   let quoteHolder = document.getElementById("quote");
   let authorHolder = document.getElementById("author");
+
   let printCharByChar = function(callback, message, target, iter = 0){
     target.innerHTML = message.slice(0, ++iter) + cursor;
     if(iter < message.length)
@@ -21,12 +28,12 @@ function setNewQuote(quote) {
       callback();
     }
   }
+
   printCharByChar(()=>{
     printCharByChar(()=>{
-      authorHolder.innerHTML = author + cursor;
-    }, author, authorHolder);
-    authorHolder.innerHTML = author + cursor;
-  }, "> " + quote, quoteHolder);
+      authorHolder.innerHTML = state.author + cursor;
+    }, state.author, authorHolder);
+  }, "> " + state.quote, quoteHolder);
 }
 
 function setStatus(status) {
@@ -35,6 +42,7 @@ function setStatus(status) {
 }
 
 function fallback() {
+  console.warn("Quote service unreachable");
   setNewQuote(getQuote());
   setStatus("Quoter service is unfortunately unreachable... But here is a backup quote for you anyway:");
 }
@@ -53,10 +61,12 @@ function httpGetAsync(callback, theUrl)
 
 function updateQuote() {
   state.quote = "";
+  const quoterService = "https://quotor.herokuapp.com/quote";
+  //const quoterService = "http://localhost:5000/quote";
   if (window.location.hash){
-    httpGetAsync(setNewQuote, "https://quotor.herokuapp.com/quote?q=" + window.location.hash.slice(1));
+    httpGetAsync(processQuoteFromService, quoterService + "?q=" + window.location.hash.slice(1));
   } else {
-    httpGetAsync(setNewQuote, "https://quotor.herokuapp.com/quote");
+    httpGetAsync(processQuoteFromService, quoterService);
   }
 }
 
@@ -85,7 +95,10 @@ function setupMenu() {
   });
   let tweet = document.getElementById("menu-tweet");
   tweet.addEventListener("click", ()=>{
-    window.open("https://twitter.com/intent/tweet?text="+state.quote);
+    const maxLen = 85
+    const post = state.quote.length > maxLen + 3 ? state.quote.slice(0,maxLen) + "..." : state.quote;
+    const uri = encodeURIComponent("https://quotor.herokuapp.com/quote?q=" + state.qid);
+    window.open("https://twitter.com/intent/tweet?text=" + post + " &url=" + uri + "&hashtags=devquotes" );
   });
 }
 
