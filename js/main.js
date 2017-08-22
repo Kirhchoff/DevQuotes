@@ -67,8 +67,8 @@ function httpGetAsync(callback, theUrl)
 
 function updateQuote() {
   state.quote = "";
-  //const quoterService = "https://quotor.herokuapp.com/quote";
-  const quoterService = "http://localhost:5000/quote";
+  const quoterService = "https://quotor.herokuapp.com/quote";
+  //const quoterService = "http://localhost:5000/quote";
   if (window.location.hash){
     httpGetAsync(processQuoteFromService, quoterService + "?q=" + window.location.hash.slice(1));
   } else {
