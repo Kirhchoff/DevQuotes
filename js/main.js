@@ -2,6 +2,9 @@
 
 var state = {};
 
+const quoteHolder = document.getElementById("quote");
+const authorHolder = document.getElementById("author");
+
 //todo: refactor: encapsulate
 var to;
 
@@ -16,8 +19,6 @@ function setNewQuote(quote) {
   state.qid = quote.id;
   clearTimeout(to);
   let cursor = "<span class=\"cursor\"></span>";
-  let quoteHolder = document.getElementById("quote");
-  let authorHolder = document.getElementById("author");
 
   let printCharByChar = function(callback, message, target, iter = 0){
     target.innerHTML = message.slice(0, ++iter) + cursor;
@@ -93,12 +94,16 @@ function setupMenu() {
   suggest.addEventListener("click", ()=>{
     showNewQuoteForm();
   });
+  let next = document.getElementById("menu-next");
+  next.addEventListener("click", ()=>{
+    loadQuote();
+  });
   let tweet = document.getElementById("menu-tweet");
   tweet.addEventListener("click", ()=>{
     const maxLen = 85
     const post = state.quote.length > maxLen + 3 ? state.quote.slice(0,maxLen) + "..." : state.quote;
     const uri = encodeURIComponent("https://quotor.herokuapp.com/quote?q=" + state.qid);
-    window.open("https://twitter.com/intent/tweet?text=" + post + " &url=" + uri + "&hashtags=devquotes" );
+    window.open("https://twitter.com/intent/tweet?text=" + post + " &url=" + uri + "&hashtags=DevQuotes" );
   });
 }
 
@@ -109,9 +114,20 @@ function setupTipjar() {
   })
 }
 
-window.onload = function() {
+function clearQuote() {
+  quoteHolder.innerHTML = "";
+  authorHolder.innerHTML = "";
+  clearTimeout(to);
+}
+
+function loadQuote() {
+  clearQuote();
   setStatus("Loading...");
   updateQuote();
+}
+
+window.onload = function() {
+  loadQuote();
   setupMenu();
   setupTipjar();
 };

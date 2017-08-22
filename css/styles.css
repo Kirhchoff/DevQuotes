@@ -237,3 +237,16 @@ nav li {
   border-width: 1px;
   border-color: #222 #888 #888 #222;
 }
+
+
+
+
+#menu-suggest {
+  color: #888;
+}
+
+.icon-ltc:before {
+    content: "Ł";
+    font-weight:bold;
+    font-style: oblique;
+}
