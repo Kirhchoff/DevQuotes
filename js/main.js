@@ -8,6 +8,10 @@ const authorHolder = document.getElementById("author");
 //todo: refactor: encapsulate
 var to;
 
+function setupDynamicLinks(quote) {
+  state.authorPage = quote.author.page;
+}
+
 function processQuoteFromService(quote) {
   setNewQuote(JSON.parse(quote));
 }
@@ -15,8 +19,9 @@ function processQuoteFromService(quote) {
 function setNewQuote(quote) {
   setStatus("");
   state.quote = quote.text;
-  state.author = " - " + quote.author;
+  state.author = " - " + quote.author.name;
   state.qid = quote.id;
+  setupDynamicLinks(quote);
   clearTimeout(to);
   let cursor = "<span class=\"cursor\"></span>";
 
@@ -62,8 +67,8 @@ function httpGetAsync(callback, theUrl)
 
 function updateQuote() {
   state.quote = "";
-  const quoterService = "https://quotor.herokuapp.com/quote";
-  //const quoterService = "http://localhost:5000/quote";
+  //const quoterService = "https://quotor.herokuapp.com/quote";
+  const quoterService = "http://localhost:5000/quote";
   if (window.location.hash){
     httpGetAsync(processQuoteFromService, quoterService + "?q=" + window.location.hash.slice(1));
   } else {
@@ -104,6 +109,12 @@ function setupMenu() {
     const post = state.quote.length > maxLen + 3 ? state.quote.slice(0,maxLen) + "..." : state.quote;
     const uri = encodeURIComponent("https://quotor.herokuapp.com/quote?q=" + state.qid);
     window.open("https://twitter.com/intent/tweet?text=" + post + " &url=" + uri + "&hashtags=DevQuotes" );
+  });
+  let author = document.getElementById("menu-author");
+  author.addEventListener("click", ()=>{
+    if(state.authorPage) {
+      window.open(state.authorPage, "_blank");
+    }
   });
 }
 
