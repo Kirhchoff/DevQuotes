@@ -22,6 +22,7 @@ function setNewQuote(quote) {
   state.author = " - " + quote.author.name;
   state.qid = quote.id;
   setupDynamicLinks(quote);
+  window.location.hash = state.qid;
   clearTimeout(to);
   let cursor = "<span class=\"cursor\"></span>";
 
@@ -101,6 +102,7 @@ function setupMenu() {
   });
   let next = document.getElementById("menu-next");
   next.addEventListener("click", ()=>{
+    window.location.hash = "";
     loadQuote();
   });
   let tweet = document.getElementById("menu-tweet");
