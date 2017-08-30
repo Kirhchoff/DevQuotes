@@ -10,6 +10,7 @@ var to;
 
 function setupDynamicLinks(quote) {
   state.authorPage = quote.author.page;
+  state.source = "";
 }
 
 function processQuoteFromService(quote) {
@@ -87,6 +88,16 @@ function hideTipJar(){
   tipJar.style.display = "none";
 }
 
+function showAbout(){
+  let tipJar = document.getElementById("about-quote");
+  tipJar.style.display = "block";
+}
+
+function hideAbout(){
+  let tipJar = document.getElementById("about-quote");
+  tipJar.style.display = "none";
+}
+
 function showNewQuoteForm() {
   console.log("New quote form");
 }
@@ -95,6 +106,14 @@ function setupMenu() {
   let tipJar = document.getElementById("menu-tips");
   tipJar.addEventListener("click", ()=>{
     showTipJar();
+  });
+  let about = document.getElementById("menu-about");
+  about.addEventListener("click", ()=>{
+    showAbout();
+  });
+  let quoteText = document.getElementById("quote");
+  quote.addEventListener("click", ()=>{
+    showAbout();
   });
   let suggest = document.getElementById("menu-suggest");
   suggest.addEventListener("click", ()=>{
@@ -127,6 +146,13 @@ function setupTipjar() {
   })
 }
 
+function setupAbout() {
+  let btnClose = document.getElementById("btn-close-about");
+  btnClose.addEventListener("click", ()=>{
+    hideAbout();
+  })
+}
+
 function clearQuote() {
   quoteHolder.innerHTML = "";
   authorHolder.innerHTML = "";
@@ -139,8 +165,13 @@ function loadQuote() {
   updateQuote();
 }
 
+function setupDialogs() {
+  setupTipjar();
+  setupAbout();
+}
+
 window.onload = function() {
   loadQuote();
   setupMenu();
-  setupTipjar();
+  setupDialogs();
 };
