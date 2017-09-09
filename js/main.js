@@ -110,7 +110,11 @@ function setupMenu() {
     showAbout();
   });
   let quoteText = document.getElementById("quote");
-  quote.addEventListener("click", ()=>{
+  quoteText.addEventListener("click", ()=>{
+    showAbout();
+  });
+  let authorText = document.getElementById("author");
+  authorText.addEventListener("click", ()=>{
     showAbout();
   });
   let suggest = document.getElementById("menu-suggest");
@@ -172,13 +176,21 @@ function setupDialogs() {
   setupAbout();
 }
 
+function fillAboutField(field, url, content) {
+  if (url != undefined && url.length > 3) {
+    field.innerHTML = '<a href="' + url + '">' + content + "</a>";
+  } else {
+    field.innerHTML = content;
+  }
+}
+
 function fillupAbout() {
   let source = document.getElementById('about-source');
   let sourceType = document.getElementById('about-source-type');
   let author = document.getElementById('about-author');
-  sourceType.innerHTML = '<a href="' + state.source.url + '">' + state.source.type + "</a>";
-  author.innerHTML = '<a href="' + state.author.page + '">' + state.author.name + "</a>";
-  source.innerHTML = '<a href="' + state.source.url + '">' + state.source.name + "</a>";
+  fillAboutField(sourceType, state.source.url, state.source.type);
+  fillAboutField(author, state.author.page, state.author.name);
+  fillAboutField(source, state.source.url, state.source.name);
   let image = document.getElementById("about-img");
   if (state.source.img != undefined && state.source.img.length > 3) {
     let imageLink = document.getElementById("about-img-link");
@@ -189,6 +201,7 @@ function fillupAbout() {
   } else {
     image.style.display = "none";
   }
+
   if (state.additionalInfo != undefined) {
     let additional = document.getElementById('about-additional');
     additional.innerHTML = state.additionalInfo;
