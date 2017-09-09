@@ -195,6 +195,10 @@ nav li {
   border-width: 2px;
   border-color: #888 #222 #222 #888;
   max-width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.3rem;
 }
 
 .box-topbar {
@@ -208,6 +212,8 @@ nav li {
 
 .box-content {
   margin: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .btn-close {
@@ -217,9 +223,6 @@ nav li {
 }
 .btn-close:hover {
   border: 1px outset #999;
-}
-
-.box-content p {
 }
 
 .box-content img {
@@ -239,6 +242,40 @@ nav li {
   border-color: #222 #888 #888 #222;
 }
 
+.button {
+  background-color: #ededed;
+  color: #222;
+  border: 1px solid #222;
+  width: 10rem;
+  height: 2.4rem;
+  outline: none;
+}
+
+.button:hover {
+  border: 1px solid #888;
+}
+
+.button:active {
+  border: 1px solid #222;
+}
+
+.box-content.large {
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+.box-content.large >p {
+  margin-top: 1.5rem;
+}
+
+.box-content img {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+.about-field {
+  font-weight: bold;
+  white-space: nowrap;
+}
 
 
 

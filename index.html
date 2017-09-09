@@ -57,17 +57,18 @@
         <div class="box">
           <div class="box-topbar">
             <i class="fa fa-gift"></i> Tipjar
-            <button class="btn-close" id="btn-close-tipjar"><i class="fa fa-times"></i></button>
+            <button class="btn-close btn-close-tipjar"><i class="fa fa-times"></i></button>
           </div>
           <div class="box-content">
-            <p>If you liked your quote, trow me a tip:</p>
+            <p>If you like the quotes, throw me a tip:</p>
             <hr>
-            <p><i class="fa fa-btc" aria-hidden="true"></i> Bitcoin address: <em>18GW6Lc9KHWCcH7DbtrutEisTH874SDNHN</em><br><img src="resources/LTC.png"></p>
+            <p><i class="fa fa-btc" aria-hidden="true"></i> Bitcoin address: <em>18GW6Lc9KHWCcH7DbtrutEisTH874SDNHN</em><br><img src="resources/BTC.png"></p>
             <hr>
             <p><i class="icon-ltc" aria-hidden="true"></i> Litecoin address:<br><em>LawkvBv8oWUtmnZWWK2ZtivXXQxLJSgkuE</em><br><img src="resources/LTC.png"></p>
             <hr>
             <p>Thank you!</p>
           </div>
+          <button class="button btn-close-tipjar">Close</button>
         </div>
       </div>
 
@@ -78,11 +79,15 @@
             <div class="box">
               <div class="box-topbar">
                 <i class="fa fa-quote-right"></i> About this quote
-                <button class="btn-close" id="btn-close-about"><i class="fa fa-times"></i></button>
+                <button class="btn-close btn-close-about"><i class="fa fa-times"></i></button>
               </div>
-              <div class="box-content">
-                TODO
+              <div class="box-content large">
+                  <p>Quote comes from a <span class="about-field" id="about-source-type"></span> by <span class="about-field" id="about-author"></span>:</p>
+                  <p class="about-field" id="about-source"></p>
+                  <a id="about-img-link"><img id="about-img"></a>
+                  <p  class="about-field" id="about-additional"></p>
               </div>
+              <button class="button btn-close-about">Close</button>
             </div>
           </div>
         </div>

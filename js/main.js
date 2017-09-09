@@ -8,11 +8,6 @@ const authorHolder = document.getElementById("author");
 //todo: refactor: encapsulate
 var to;
 
-function setupDynamicLinks(quote) {
-  state.authorPage = quote.author.page;
-  state.source = "";
-}
-
 function processQuoteFromService(quote) {
   setNewQuote(JSON.parse(quote));
 }
@@ -20,9 +15,10 @@ function processQuoteFromService(quote) {
 function setNewQuote(quote) {
   setStatus("");
   state.quote = quote.text;
-  state.author = " - " + quote.author.name;
+  state.author = quote.author;
   state.qid = quote.id;
-  setupDynamicLinks(quote);
+  state.source = {type: quote.source.type, url: quote.source.url, name: quote.source.name, img: quote.source.img};
+  state.additionalInfo = quote.additionalInfo;
   window.location.hash = state.qid;
   clearTimeout(to);
   let cursor = "<span class=\"cursor\"></span>";
@@ -38,9 +34,10 @@ function setNewQuote(quote) {
   }
 
   printCharByChar(()=>{
+    let authorStr = " - " + state.author.name;
     printCharByChar(()=>{
-      authorHolder.innerHTML = state.author + cursor;
-    }, state.author, authorHolder);
+      authorHolder.innerHTML = authorStr + cursor;
+    }, authorStr, authorHolder);
   }, "> " + state.quote, quoteHolder);
 }
 
@@ -89,6 +86,7 @@ function hideTipJar(){
 }
 
 function showAbout(){
+  fillupAbout();
   let tipJar = document.getElementById("about-quote");
   tipJar.style.display = "block";
 }
@@ -140,17 +138,21 @@ function setupMenu() {
 }
 
 function setupTipjar() {
-  let btnClose = document.getElementById("btn-close-tipjar");
-  btnClose.addEventListener("click", ()=>{
-    hideTipJar();
-  })
+  let btnCloseList = document.getElementsByClassName("btn-close-tipjar");
+  for(let i = 0; i < btnCloseList.length; i++){
+    btnCloseList[i].addEventListener("click", ()=>{
+      hideTipJar();
+    });
+  }
 }
 
 function setupAbout() {
-  let btnClose = document.getElementById("btn-close-about");
-  btnClose.addEventListener("click", ()=>{
-    hideAbout();
-  })
+  let btnCloseList = document.getElementsByClassName("btn-close-about");
+  for(let i = 0; i < btnCloseList.length; i++){
+    btnCloseList[i].addEventListener("click", ()=>{
+      hideAbout();
+    });
+  }
 }
 
 function clearQuote() {
@@ -168,6 +170,29 @@ function loadQuote() {
 function setupDialogs() {
   setupTipjar();
   setupAbout();
+}
+
+function fillupAbout() {
+  let source = document.getElementById('about-source');
+  let sourceType = document.getElementById('about-source-type');
+  let author = document.getElementById('about-author');
+  sourceType.innerHTML = '<a href="' + state.source.url + '">' + state.source.type + "</a>";
+  author.innerHTML = '<a href="' + state.author.page + '">' + state.author.name + "</a>";
+  source.innerHTML = '<a href="' + state.source.url + '">' + state.source.name + "</a>";
+  let image = document.getElementById("about-img");
+  if (state.source.img != undefined && state.source.img.length > 3) {
+    let imageLink = document.getElementById("about-img-link");
+    image.style.display = "block";
+    image.src = state.source.img;
+    image.alt = state.source.name;
+    imageLink.href = state.source.url;
+  } else {
+    image.style.display = "none";
+  }
+  if (state.additionalInfo != undefined) {
+    let additional = document.getElementById('about-additional');
+    additional.innerHTML = state.additionalInfo;
+  }
 }
 
 window.onload = function() {
