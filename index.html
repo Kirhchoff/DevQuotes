@@ -30,7 +30,7 @@
             <li id="menu-next"><i class="fa fa-arrow-right" aria-hidden="true"></i> Next quote</li>
             <li>More...
               <ul class="drop-down-menu">
-                <li id="menu-quote"><i class="fa fa-quote-right"></i> About this quote</li>
+                <li id="menu-about"><i class="fa fa-quote-right"></i> About this quote</li>
                 <li id="menu-author"><i class="fa fa-pencil"></i> Go to author's page</li>
                 <li id="menu-suggest"><i class="fa fa-plus"></i> Suggest a new quote...</li>
                 <li id="menu-tips"><i class="fa fa-gift"></i> Tipjar</li>
@@ -57,20 +57,40 @@
         <div class="box">
           <div class="box-topbar">
             <i class="fa fa-gift"></i> Tipjar
-            <button class="btn-close" id="btn-close-tipjar"><i class="fa fa-times"></i></button>
+            <button class="btn-close btn-close-tipjar"><i class="fa fa-times"></i></button>
           </div>
           <div class="box-content">
-            <p>If you liked your quote, trow me a tip:</p>
+            <p>If you like the quotes, throw me a tip:</p>
             <hr>
-            <p><i class="fa fa-btc" aria-hidden="true"></i> Bitcoin address: <em>18GW6Lc9KHWCcH7DbtrutEisTH874SDNHN</em><br><img src="resources/LTC.png"></p>
+            <p><i class="fa fa-btc" aria-hidden="true"></i> Bitcoin address: <em>18GW6Lc9KHWCcH7DbtrutEisTH874SDNHN</em><br><img src="resources/BTC.png"></p>
             <hr>
             <p><i class="icon-ltc" aria-hidden="true"></i> Litecoin address:<br><em>LawkvBv8oWUtmnZWWK2ZtivXXQxLJSgkuE</em><br><img src="resources/LTC.png"></p>
             <hr>
             <p>Thank you!</p>
           </div>
+          <button class="button btn-close-tipjar">Close</button>
         </div>
       </div>
+
     </div>
+        <div class="popup" id="about-quote">
+          <div class="popup-greyout"></div>
+          <div class="popup-container">
+            <div class="box">
+              <div class="box-topbar">
+                <i class="fa fa-quote-right"></i> About this quote
+                <button class="btn-close btn-close-about"><i class="fa fa-times"></i></button>
+              </div>
+              <div class="box-content large">
+                  <p>Quote comes from a <span class="about-field" id="about-source-type"></span> by <span class="about-field" id="about-author"></span>:</p>
+                  <p class="about-field" id="about-source"></p>
+                  <a id="about-img-link"><img id="about-img"></a>
+                  <p  class="about-field" id="about-additional"></p>
+              </div>
+              <button class="button btn-close-about">Close</button>
+            </div>
+          </div>
+        </div>
   </div>
   <script src="js/fallback_quotes.js"></script>
   <script src="js/main.js"></script>
