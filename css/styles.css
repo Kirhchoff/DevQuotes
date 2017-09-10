@@ -182,8 +182,8 @@ nav li {
   top: 0;
   left: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -194,7 +194,7 @@ nav li {
   border-style: solid;
   border-width: 2px;
   border-color: #888 #222 #222 #888;
-  max-width: 75%;
+  flex: 0 1 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -274,7 +274,7 @@ nav li {
 
 .about-field {
   font-weight: bold;
-  white-space: nowrap;
+  text-decoration: underline;
 }
 
 

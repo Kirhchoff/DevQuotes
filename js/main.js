@@ -190,7 +190,7 @@ function fillupAbout() {
   let author = document.getElementById('about-author');
   fillAboutField(sourceType, state.source.url, state.source.type);
   fillAboutField(author, state.author.page, state.author.name);
-  fillAboutField(source, state.source.url, '"'+state.source.name+'"');
+  fillAboutField(source, state.source.url, '"' + state.source.name + '"');
   let image = document.getElementById("about-img");
   if (state.source.img != undefined && state.source.img.length > 3) {
     let imageLink = document.getElementById("about-img-link");
