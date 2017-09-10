@@ -17,7 +17,7 @@ function setNewQuote(quote) {
   state.quote = quote.text;
   state.author = quote.author;
   state.qid = quote.id;
-  state.source = {type: quote.source.type, url: quote.source.url, name: quote.source.name, img: quote.source.img};
+  state.source = quote.source;
   state.additionalInfo = quote.additionalInfo;
   window.location.hash = state.qid;
   clearTimeout(to);
@@ -188,9 +188,15 @@ function fillupAbout() {
   let source = document.getElementById('about-source');
   let sourceType = document.getElementById('about-source-type');
   let author = document.getElementById('about-author');
-  fillAboutField(sourceType, state.source.url, state.source.type);
+  if (state.source != undefined) {
+    fillAboutField(sourceType, state.source.url, state.source.type);
+    fillAboutField(source, state.source.url, '"' + state.source.name + '"');
+  }
+  else {
+    fillAboutField(sourceType, "", "unknown origin");
+    fillAboutField(source, "", "");
+  }
   fillAboutField(author, state.author.page, state.author.name);
-  fillAboutField(source, state.source.url, '"' + state.source.name + '"');
   let image = document.getElementById("about-img");
   if (state.source.img != undefined && state.source.img.length > 3) {
     let imageLink = document.getElementById("about-img-link");
