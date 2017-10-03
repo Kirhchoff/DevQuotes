@@ -129,10 +129,10 @@ function setupMenu() {
   let tweet = document.getElementById("menu-tweet");
   tweet.addEventListener("click", ()=>{
     const maxLen = 100
-    //const post = (state.quote.length > maxLen + 3 ? state.quote.slice(0,maxLen) + "..." : state.quote) + "&url=" + uri;
-    const post = state.quote + "&url=" + uri;
-    const uri = encodeURIComponent(window.location.href + "#" + state.qid);
-    window.open("https://twitter.com/intent/tweet?text=" + post + "&hashtags=DevQuotes" );
+    //const post = (state.quote.length > maxLen + 3 ? state.quote.slice(0,maxLen) + "..." : state.quote);
+    const post = state.quote;
+    const uri = encodeURIComponent(window.location.href/* + "#" + state.qid*/);
+    window.open("https://twitter.com/intent/tweet?text=" + post + "&url=" + uri + "&hashtags=DevQuotes" );
   });
   let author = document.getElementById("menu-author");
   author.addEventListener("click", ()=>{
