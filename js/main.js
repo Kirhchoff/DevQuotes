@@ -26,7 +26,7 @@ function setNewQuote(quote) {
   let printCharByChar = function(callback, message, target, iter = 0){
     target.innerHTML = message.slice(0, ++iter) + cursor;
     if(iter < message.length)
-      to = setTimeout(printCharByChar.bind(this, callback, message, target, iter), 17);
+      to = setTimeout(printCharByChar.bind(this, callback, message, target, iter), 12);
     else {
       target.innerHTML = message;
       callback();
